@@ -3,26 +3,28 @@
 require('dotenv').config();
 
 const restify = require('restify');
-const utils = require('./lib/utils');
 const Yelp = require('./lib/apis').Yelp;
 const YELP_CONSUMER_KEY = process.env.YELP_CONSUMER_KEY;
+const Utils = require('./lib/utils');
 
 const yelpInstance = new Yelp();
 
 const yelpFoodAndLocationResponse = async (request, response, next) => {
   try {
-    let apiResponse = await yelpInstance.testGetData(request.params.food, request.params.location);
+    let apiResponse = await yelpInstance.getDataGivenCity(request.params.food, request.params.location);
+    apiResponse = Utils.YelpBusinessFilter(apiResponse);
+    response.send(await apiResponse);
+  } catch (apiError) {
+    response.send(await apiError);
+  }
 
-    apiResponse = apiResponse.businesses.filter(business => {
-      if (!business.is_closed) return business;
-    }).map(business => ({
-      name: business.name,
-      rating: business.rating,
-      image_url: business.image_url,
-      display_address: business.location.display_address,
-      coordinates: business.location.coordinate
-    }));
+  next();
+}
 
+const yelpFoodAndCoordinatesResponse = async (request, response, next) => {
+  try {
+    let apiResponse = await yelpInstance.getDataGivenCoordinates(request.params.food, request.params.latitude, request.params.longitude);
+    apiResponse = Utils.YelpBusinessFilter(apiResponse);
     response.send(await apiResponse);
   } catch (apiError) {
     response.send(await apiError);
@@ -34,6 +36,9 @@ const yelpFoodAndLocationResponse = async (request, response, next) => {
 const server = restify.createServer();
 server.get('/api/:food/:location', yelpFoodAndLocationResponse);
 server.head('/api/:food/:location', yelpFoodAndLocationResponse);
+
+server.get('/api/:food/:lat/:long', yelpFoodAndCoordinatesResponse);
+server.head('/api/:food', yelpFoodAndCoordinatesResponse);
 
 server.listen(process.env.SERVE_PORT, () => {
   console.log(`${server.name} listening at ${server.url}`);

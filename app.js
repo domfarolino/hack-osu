@@ -6,9 +6,7 @@ const restify = require('restify');
 const Yelp = require('./lib/apis').Yelp;
 const YELP_CONSUMER_KEY = process.env.YELP_CONSUMER_KEY;
 
-console.log(YELP_CONSUMER_KEY);
-
-const yelpInstance = new Yelp();
+const yelpInstance = new Yelp(YELP_CONSUMER_KEY);
 yelpInstance.testGetData().then(response => {console.log(response)}).catch(e => {console.error(e)});
 
 const respond = (request, response, next) => {

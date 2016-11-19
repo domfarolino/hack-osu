@@ -1,10 +1,10 @@
 'use strict';
 
-import { restify } from 'restify';
+const restify = require('restify');
 
 require('dotenv').config();
 
-respond = (request, response, next) => {
+const respond = (request, response, next) => {
   response.send({ hello: request.params.name });
   next();
 }

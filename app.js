@@ -13,9 +13,9 @@ const yelpFoodAndLocationResponse = async (request, response, next) => {
   try {
     let apiResponse = await yelpInstance.getDataGivenCity(request.params.food, request.params.location);
     apiResponse = Utils.YelpBusinessFilter(apiResponse);
-    response.send(await apiResponse);
+    response.send(apiResponse);
   } catch (apiError) {
-    response.send(await apiError);
+    response.send(apiError);
   }
 
   next();
@@ -25,9 +25,9 @@ const yelpFoodAndCoordinatesResponse = async (request, response, next) => {
   try {
     let apiResponse = await yelpInstance.getDataGivenCoordinates(request.params.food, request.params.latitude, request.params.longitude);
     apiResponse = Utils.YelpBusinessFilter(apiResponse);
-    response.send(await apiResponse);
+    response.send(apiResponse);
   } catch (apiError) {
-    response.send(await apiError);
+    response.send(apiError);
   }
 
   next();

@@ -1,6 +1,10 @@
 'use strict';
 
 const restify = require('restify');
+const Yelp = require('./lib/apis').Yelp;
+
+const yelpInstance = new Yelp();
+yelpInstance.testGetData().then(response => {console.log(response)}).catch(e => {console.error(e)});
 
 require('dotenv').config();
 

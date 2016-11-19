@@ -29,7 +29,8 @@
     "dotenv": "^2.0.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "yelp": "^1.0.1"
   },
   "devDependencies": {
     "css-loader": "^0.26.0",

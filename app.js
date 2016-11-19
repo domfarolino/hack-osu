@@ -1,4 +1,6 @@
-const restify = require('restify');
+'use strict';
+
+import { restify } from 'restify';
 
 require('dotenv').config();
 

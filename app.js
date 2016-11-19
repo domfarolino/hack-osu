@@ -2,8 +2,8 @@ const restify = require('restify');
 
 require('dotenv').config();
 
-function respond(request, response, next) {
-  response.send('hello ' + request.params.name);
+respond = (request, response, next) => {
+  response.send({ hello: request.params.name });
   next();
 }
 
@@ -11,6 +11,6 @@ const server = restify.createServer();
 server.get('/api/:name', respond);
 server.head('/api/:name', respond);
 
-server.listen(process.env.SERVE_PORT, function() {
+server.listen(process.env.SERVE_PORT, () => {
   console.log(`${server.name} listening at ${server.url}`);
 });

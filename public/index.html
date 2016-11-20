@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Delivr</title>
+    <meta name="author" content="Dom Farolino + Noah Bass">
+    <meta name="description" content="Delivr intelligently finds you the best delivery options">
+    <meta name="theme-color" content="#ECECEC">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css">
+    <link href="https://fonts.googleapis.com/icon?family=Lobster" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
+  </head>
+  <body class="claro">
+
+    <header class="secondary">
+      <h1>Delivr</h1>
+      <div class="primary" id="input-data">
+        <form>
+          <label for="food">Food:</label>
+          <input required type="text" name="gender" id="food" placeholder="ex: pizza"><br>
+          <button type="submit" id="get-data" class="secondary">Generate best food sources</button>
+        </form>
+      </div>
+    </header>
+
+    <div id="map"></div>
+
+  </body>
+  <script src="https://js.arcgis.com/3.18/"></script>
+  <script>
+    var map;
+    require(['esri/map', 'dojo/domReady!'], function(Map) {
+      var hour = new Date().getHours();
+      map = new Map("map", {
+        basemap: (hour >= 20) ? 'dark-gray-vector' : 'streets-vector',
+        center: [-122.45, 37.75],
+        zoom: 13
+      });
+    });
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true" defer></script>
+  <script src="/js/bundle.min.js" defer></script>
+</html>

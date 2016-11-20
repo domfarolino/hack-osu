@@ -57,6 +57,11 @@ server.get('/api/:foodCategory/:userLoationName/:lat/:long', mapData);
 // server.get('/api/:food/:lat/:long', yelpFoodAndCoordinatesResponse);
 // server.head('/api/:food', yelpFoodAndCoordinatesResponse);
 
+server.get(/.*/, restify.serveStatic({
+	'directory': `${__dirname}/public`,
+	'default': 'index.html'
+}));
+
 server.listen(process.env.SERVE_PORT, () => {
   console.log(`${server.name} listening at ${server.url}`);
 });

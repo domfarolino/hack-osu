@@ -4,7 +4,9 @@
   "description": "Hack OH/IO - Dom & Noah",
   "main": "index.js",
   "scripts": {
-    "start": "node --harmony-async-await app.js",
+    "start": "concurrently \"npm run webpack\" \"npm run server\" --kill-others",
+    "server": "node --harmony-async-await app.js",
+    "webpack": "./node_modules/webpack/bin/webpack.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +35,7 @@
     "yelp": "^1.0.1"
   },
   "devDependencies": {
+    "concurrently": "^3.1.0",
     "css-loader": "^0.26.0",
     "html-loader": "^0.4.4",
     "webpack": "^2.1.0-beta.27"

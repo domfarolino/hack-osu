@@ -7,24 +7,25 @@ module.exports = {
     path: path.join(__dirname, './public/js/'),
     filename: 'bundle.min.js'
   },
-  // module: {
-  //   loaders: [
-  //     {
-  //       test: /\.js$/,
-  //       exclude: /(node_modules)/,
-  //       loader: 'babel-loader',
-  //       query: {
-  //         presets: ['es2015']
-  //       }
-  //     }
-  //   ]
-  // },
-  // plugins: [
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     compress: false,
-  //     compress: {
-  //       warnings: false
-  //     }
-  //   })
-  // ]
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
+      },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
+    ]
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: false,
+      compress: {
+        warnings: false
+      }
+    })
+  ]
 }
